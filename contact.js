@@ -3,7 +3,7 @@
 (function () {
   // Cle publique EmailJS : c'est normal et sans risque qu'elle soit visible
   // cote client, elle est prevue pour ca (equivalent d'une cle "site" publique).
-  emailjs.init({ publicKey: 'OPbP-28fhj6A3LEY-' });
+  emailjs.init({ publicKey: '0PbP-28fhj6A3LEY-' });
 
   const SERVICE_ID = 'service_8jo8z0y';
   const TEMPLATE_ID = 'template_8gbjvvm';

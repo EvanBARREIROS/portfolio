@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Evan Barreiros</title>
+<meta name="description" content="Contacter Evan Barreiros.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+<div class="page-bg" id="page-bg" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <ul class="nav-left">
+      <li><a href="index.html" class="brand">Evan Barreiros</a></li>
+      <li><a href="contact.html" class="contact-link">Contact</a></li>
+    </ul>
+    <div class="topbar-right">
+      <button class="icon-btn" id="theme-toggle" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="menu-panel" id="menu-panel">
+        <a href="about.html">À propos</a>
+        <a href="skills.html">Compétences</a>
+        <a href="projects.html">Projets</a>
+        <a href="services.html">Services</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-name">
+    <span class="role">Contact</span>
+    <h1>Discutons de ton projet</h1>
+    <p>Par mail, sur GitHub, LinkedIn, ou via le formulaire ci-dessous.</p>
+  </section>
+
+  <section class="contact-wrap">
+    <!-- Liens directs -->
+    <div class="contact-links">
+      <a href="mailto:evan.barreiros.pro@gmail.com">
+        <img src="Assets/images/gmail.png" alt="" class="link-icon">
+        <span class="link-text">
+          <span class="link-label">Email professionnel</span>
+          <span class="link-value">evan.barreiros.pro@gmail.com</span>
+        </span>
+      </a>
+      <a href="https://github.com/EvanBARREIROS" target="_blank" rel="noopener">
+        <img src="Assets/images/github.png" alt="" class="link-icon">
+        <span class="link-text">
+          <span class="link-label">GitHub — professionnel</span>
+          <span class="link-value">github.com/EvanBARREIROS</span>
+        </span>
+      </a>
+      <a href="https://github.com/BleuDragonViolet" target="_blank" rel="noopener">
+        <img src="Assets/images/github.png" alt="" class="link-icon">
+        <span class="link-text">
+          <span class="link-label">GitHub — projets perso</span>
+          <span class="link-value">github.com/BleuDragonViolet</span>
+        </span>
+      </a>
+      <a href="https://www.linkedin.com/in/evanbarreiros/" target="_blank" rel="noopener">
+        <img src="Assets/images/Linkedin.png" alt="" class="link-icon">
+        <span class="link-text">
+          <span class="link-label">LinkedIn</span>
+          <span class="link-value">linkedin.com/in/evanbarreiros</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Formulaire de contact (EmailJS) -->
+    <div class="contact-form-card">
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <label for="from_name">Nom / prénom</label>
+          <input type="text" id="from_name" name="from_name" placeholder="Ton nom et prénom" required>
+        </div>
+
+        <div class="form-row">
+          <label for="contact_method">Comment puis-je te recontacter ?</label>
+          <input type="text" id="contact_method" name="contact_method" placeholder="Email / numéro / réseaux sociaux" required>
+        </div>
+
+        <div class="form-row">
+          <label for="subject">Sujet</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Choisis un sujet</option>
+            <option value="Question">Question</option>
+            <option value="Service">Service</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Décris-moi ton besoin…" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Envoyer</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Evan Barreiros</footer>
+
+<script src="script.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>

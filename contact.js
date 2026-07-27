@@ -170,7 +170,7 @@
     // Piege anti-bot : si rempli, on simule un envoi reussi sans rien faire
     if (honeypot && honeypot.value.trim() !== '') {
       localStorage.setItem(COOLDOWN_KEY, String(Date.now()));
-      statusEl.textContent = 'Message envoyé, merci ! Je te réponds au plus vite.';
+      statusEl.textContent = 'Message envoyé, merci ! Je vous réponds au plus vite.';
       statusEl.className = 'form-status success';
       form.reset();
       startCooldownDisplay();
@@ -184,7 +184,7 @@
 
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
       .then(() => {
-        statusEl.textContent = 'Message envoyé, merci ! Je te réponds au plus vite.';
+        statusEl.textContent = 'Message envoyé, merci ! Je vous réponds au plus vite.';
         statusEl.className = 'form-status success';
         form.reset();
         validatedFields.forEach((field) => field.classList.remove('valid', 'invalid'));
@@ -193,7 +193,7 @@
         startCooldownDisplay();
       })
       .catch((err) => {
-        statusEl.textContent = "Une erreur est survenue, réessaie dans un instant.";
+        statusEl.textContent = "Une erreur est survenue, réessayez dans un instant.";
         statusEl.className = 'form-status error';
         console.error('EmailJS error:', err);
         submitBtn.disabled = false;

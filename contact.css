@@ -14,6 +14,25 @@
   }
 }
 
+@media (max-width:400px) {
+  .contact-links {
+    padding: 18px;
+  }
+  .contact-form-card {
+    padding: 20px;
+  }
+  .contact-links a.contact-link-main {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .copy-btn {
+    width: 36px;
+  }
+  .contact-links .link-value {
+    font-size: 0.8rem;
+  }
+}
+
 .contact-links {
   background: var(--bg-card);
   border: 1px solid var(--line);
@@ -72,7 +91,7 @@
 
 .contact-links .link-value {
   font-size: 0.86rem;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   word-break: normal;
 }
 
@@ -223,7 +242,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: var(--accent);
+  background: var(--accent-btn);
   color: #fff;
   border: none;
   padding: 13px 28px;

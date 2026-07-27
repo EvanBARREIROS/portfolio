@@ -4,9 +4,10 @@
   --bg-card: #121212;
   --line: #262626;
   --text: #efeceA;
-  --text-muted: #918c95;
+  --text-muted: #b3aeb6;
   --accent: #E3542E;
   --accent-2: #2EE6D6;
+  --accent-btn: #b8391b;
   --radius-lg: 22px;
   --radius-md: 14px;
 
@@ -19,11 +20,12 @@
 html[data-theme="light"]{
   --bg: #faf8f5;
   --bg-card: #ffffff;
-  --line: #d9d2c6;
+  --line: #c7bfb2;
   --text: #1b191c;
-  --text-muted: #706b73;
-  --accent: #d1481f;
-  --accent-2: #128d80;
+  --text-muted: #514c53;
+  --accent: #b23c19;
+  --accent-2: #0d7268;
+  --accent-btn: #b23c19;
 }
 
 /* En theme clair, les cartes ont besoin d'une ombre pour bien se detacher du fond */
@@ -183,7 +185,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
 }
 .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
 .tag{
-  font-family:var(--font-mono); font-size:0.76rem; color:var(--text-muted);
+  font-family:var(--font-mono); font-size:0.76rem; font-weight:600; color:var(--text-muted);
   border:1px solid var(--line); padding:6px 12px; border-radius:7px;
   transition: color .6s ease, border-color .6s ease;
 }

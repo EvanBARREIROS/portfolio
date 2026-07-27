@@ -25,17 +25,25 @@
   transition: background-color 1.6s ease, border-color .22s ease;
 }
 
-.contact-links a {
+.contact-link-item {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.contact-links a.contact-link-main {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
+  flex: 1;
+  min-width: 0;
   transition: border-color .2s ease, color .2s ease;
 }
 
-.contact-links a:hover {
+.contact-links a.contact-link-main:hover {
   border-color: var(--accent-2);
   color: var(--accent-2);
 }
@@ -63,8 +71,50 @@
 }
 
 .contact-links .link-value {
-  font-size: 0.92rem;
-  word-break: break-word;
+  font-size: 0.86rem;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease;
+}
+
+.copy-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.copy-btn .icon-check {
+  display: none;
+}
+
+.copy-btn:hover {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+.copy-btn.copied {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+.copy-btn.copied .icon-copy {
+  display: none;
+}
+
+.copy-btn.copied .icon-check {
+  display: block;
 }
 
 .contact-form-card {
@@ -85,6 +135,10 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.form-row[hidden] {
+  display: none;
 }
 
 .form-row label {
@@ -120,8 +174,51 @@
   resize: vertical;
 }
 
+/* Validation visuelle au blur */
+.contact-form input.invalid,
+.contact-form select.invalid,
+.contact-form textarea.invalid {
+  border-color: var(--accent);
+}
+
+.contact-form input.valid,
+.contact-form select.valid,
+.contact-form textarea.valid {
+  border-color: var(--accent-2);
+}
+
+.char-count {
+  align-self: flex-end;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.char-count.limit-near {
+  color: var(--accent);
+}
+
+/* Piège anti-bot : invisible pour les humains, présent pour les bots */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
 .submit-btn {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -142,6 +239,34 @@
 .submit-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.btn-spinner {
+  display: none;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: contact-spin .7s linear infinite;
+}
+
+.submit-btn.loading .btn-spinner {
+  display: inline-block;
+}
+
+.submit-btn.loading .btn-label {
+  opacity: 0.85;
+}
+
+@keyframes contact-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cooldown-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
 
 .form-status {

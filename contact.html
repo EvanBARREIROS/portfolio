@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Evan Barreiros</title>
 <meta name="description" content="Contacter Evan Barreiros.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Evan Barreiros">
+<meta property="og:description" content="Discutons de ton projet — par mail, GitHub, LinkedIn, ou via le formulaire.">
+<meta property="og:image" content="Assets/images/og-preview.png">
+<meta property="og:url" content="https://evanbarreiros.dev/contact.html">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="contact.css">
 </head>
@@ -45,39 +51,66 @@
   <section class="contact-wrap">
     <!-- Liens directs -->
     <div class="contact-links">
-      <a href="mailto:evan.barreiros.pro@gmail.com">
-        <img src="Assets/images/gmail.png" alt="" class="link-icon">
-        <span class="link-text">
-          <span class="link-label">Email professionnel</span>
-          <span class="link-value">evan.barreiros.pro@gmail.com</span>
-        </span>
-      </a>
-      <a href="https://github.com/EvanBARREIROS" target="_blank" rel="noopener">
-        <img src="Assets/images/github.png" alt="" class="link-icon">
-        <span class="link-text">
-          <span class="link-label">GitHub — professionnel</span>
-          <span class="link-value">github.com/EvanBARREIROS</span>
-        </span>
-      </a>
-      <a href="https://github.com/BleuDragonViolet" target="_blank" rel="noopener">
-        <img src="Assets/images/github.png" alt="" class="link-icon">
-        <span class="link-text">
-          <span class="link-label">GitHub — projets perso</span>
-          <span class="link-value">github.com/BleuDragonViolet</span>
-        </span>
-      </a>
-      <a href="https://www.linkedin.com/in/evanbarreiros/" target="_blank" rel="noopener">
-        <img src="Assets/images/Linkedin.png" alt="" class="link-icon">
-        <span class="link-text">
-          <span class="link-label">LinkedIn</span>
-          <span class="link-value">linkedin.com/in/evanbarreiros</span>
-        </span>
-      </a>
+      <div class="contact-link-item">
+        <a href="mailto:evan.barreiros.pro@gmail.com" class="contact-link-main">
+          <img src="Assets/images/gmail.png" alt="" class="link-icon">
+          <span class="link-text">
+            <span class="link-label">Email professionnel</span>
+            <span class="link-value">evan.barreiros.pro@<wbr>gmail.com</span>
+          </span>
+        </a>
+        <button type="button" class="copy-btn" data-copy="evan.barreiros.pro@gmail.com" aria-label="Copier l'adresse email">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
+
+      <div class="contact-link-item">
+        <a href="https://github.com/EvanBARREIROS" target="_blank" rel="noopener" class="contact-link-main">
+          <img src="Assets/images/github.png" alt="" class="link-icon">
+          <span class="link-text">
+            <span class="link-label">GitHub — professionnel</span>
+            <span class="link-value">github.com/EvanBARREIROS</span>
+          </span>
+        </a>
+        <button type="button" class="copy-btn" data-copy="https://github.com/EvanBARREIROS" aria-label="Copier le lien GitHub">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
+
+      <div class="contact-link-item">
+        <a href="https://github.com/BleuDragonViolet" target="_blank" rel="noopener" class="contact-link-main">
+          <img src="Assets/images/github.png" alt="" class="link-icon">
+          <span class="link-text">
+            <span class="link-label">GitHub — projets perso</span>
+            <span class="link-value">github.com/BleuDragonViolet</span>
+          </span>
+        </a>
+        <button type="button" class="copy-btn" data-copy="https://github.com/BleuDragonViolet" aria-label="Copier le lien GitHub">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
+
+      <div class="contact-link-item">
+        <a href="https://www.linkedin.com/in/evanbarreiros/" target="_blank" rel="noopener" class="contact-link-main">
+          <img src="Assets/images/Linkedin.png" alt="" class="link-icon">
+          <span class="link-text">
+            <span class="link-label">LinkedIn</span>
+            <span class="link-value">linkedin.com/in/evanbarreiros</span>
+          </span>
+        </a>
+        <button type="button" class="copy-btn" data-copy="https://www.linkedin.com/in/evanbarreiros/" aria-label="Copier le lien LinkedIn">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
     </div>
 
     <!-- Formulaire de contact (EmailJS) -->
     <div class="contact-form-card">
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form" novalidate>
         <div class="form-row">
           <label for="from_name">Nom / prénom</label>
           <input type="text" id="from_name" name="from_name" placeholder="Ton nom et prénom" required>
@@ -98,12 +131,33 @@
           </select>
         </div>
 
-        <div class="form-row">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Décris-moi ton besoin…" required></textarea>
+        <div class="form-row" id="subject-other-row" hidden>
+          <label for="subject_other">Précise le sujet</label>
+          <input type="text" id="subject_other" name="subject_other" placeholder="En quelques mots…" maxlength="120">
         </div>
 
-        <button type="submit" class="submit-btn" id="submit-btn">Envoyer</button>
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Décris-moi ton besoin…" required maxlength="2500"></textarea>
+          <span class="char-count" id="char-count">0 / 2500</span>
+        </div>
+
+        <!-- Sujet combiné (ex: "Autre — précision") envoyé à EmailJS, rempli en JS -->
+        <input type="hidden" id="subject_display" name="subject_display" value="">
+
+        <!-- Piège anti-bot : invisible et ignoré par les humains, rempli par les bots -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Laisser vide</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn" id="submit-btn">
+            <span class="btn-label">Envoyer</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+          <span class="cooldown-text" id="cooldown-text"></span>
+        </div>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>

@@ -46,49 +46,19 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{ display:none; width:0; height:
 body{
   margin:0; color:var(--text);
   font-family:var(--font-body); line-height:1.6;
-  transition: color 1.6s ease;
+  transition: color .6s ease;
   /* espace reserve en bas = hauteur reelle du footer (calculee en JS),
      pour ne jamais laisser de vide en trop sous le contenu */
   padding-bottom: var(--footer-h, 55px);
 }
 
-/* Couche de fond fixe, derriere tout le contenu : c'est ELLE seule qui se retourne
-   en plaques au changement de theme. Navbar, cartes, footer, texte restent
-   affiches en continu et se contentent d'un fondu de couleur (regles plus bas). */
+/* Couche de fond fixe, derriere tout le contenu. Au changement de theme, le
+   script y applique un clip-path en cercle (anime en JS) qui part du bouton
+   theme et se propage jusqu'a couvrir tout l'ecran, pour reveler la nouvelle
+   couleur. Hors animation, elle reste simplement pleine et statique. */
 .page-bg{
   position:fixed; inset:0; z-index:-1; pointer-events:none;
   background: var(--bg);
-  transition: background-color 1.6s ease;
-}
-.page-bg.is-flipping-setup{
-  display:grid;
-  grid-template-columns: repeat(var(--flip-cols), 1fr);
-  grid-template-rows: repeat(var(--flip-rows), 1fr);
-}
-/* Chaque case a sa propre perspective : la plaque tourne comme une vraie carte a
-   deux faces (avant = couleur qu'on quitte, arriere = nouvelle couleur), pas un
-   simple aplat qui se degrade. */
-.page-bg .tile-cell{
-  position:relative;
-  perspective: 500px;
-}
-.page-bg .flip-tile{
-  position:absolute; inset:0;
-  transform-style: preserve-3d;
-  transform: rotateY(0deg);
-  transition: transform .55s cubic-bezier(.76,0,.24,1) var(--tile-delay);
-}
-.page-bg.is-flipping .flip-tile{
-  transform: rotateY(180deg);
-}
-.page-bg .face{
-  position:absolute; inset:-1px;
-  backface-visibility: hidden;
-}
-.page-bg .face-front{ background: var(--tile-front); }
-.page-bg .face-back{
-  background: var(--tile-back);
-  transform: rotateY(180deg);
 }
 @media (prefers-reduced-motion: reduce){
   .page-bg{ transition:none; }
@@ -105,7 +75,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
-  transition: background-color 1.6s ease, border-color 1.6s ease;
+  transition: background-color .6s ease, border-color .6s ease;
 }
 .topbar-inner{
   display:flex; align-items:center; justify-content:space-between; height:64px;
@@ -120,7 +90,14 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   font-family:var(--font-display); font-size:1rem; letter-spacing:0; color:var(--text);
 }
 .nav-left .brand:hover{ color:var(--accent-2); }
-@media (max-width:680px){ .nav-left .contact-link{ display:none; } }
+
+@media (max-width:400px){
+  .wrap{ padding:0 16px; }
+  .nav-left{ gap:14px; }
+  .nav-left .brand{ font-size:0.9rem; }
+  .nav-left a{ font-size:0.72rem; }
+  .topbar-right{ gap:6px; }
+}
 
 .topbar-right{ display:flex; align-items:center; gap:10px; position:relative; }
 
@@ -128,7 +105,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
   background:var(--bg-card); color:var(--text); cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  transition: border-color .2s, background-color 1.6s ease, color 1.5s ease;
+  transition: border-color .2s, background-color .6s ease, color .6s ease;
 }
 .icon-btn:hover{ border-color: var(--accent-2); }
 .icon-btn svg{ width:17px; height:17px; }
@@ -138,7 +115,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   position:absolute; top:52px; right:0; width:220px;
   background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius-md);
   padding:10px; display:none; box-shadow:0 18px 40px -14px rgba(0,0,0,0.5);
-  transition: background-color 1.6s ease, border-color 1.6s ease;
+  transition: background-color .6s ease, border-color .6s ease;
 }
 .menu-panel.open{ display:block; }
 .menu-panel a{
@@ -172,7 +149,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
 
 .card{
   background:var(--bg-card); border:1px solid var(--line);
-  transition: transform .22s ease, border-color .22s ease, background-color 1.6s ease;
+  transition: transform .22s ease, border-color .22s ease, background-color .6s ease;
 }
 .card:hover{ transform: translateY(-4px); border-color: var(--accent-2); }
 
@@ -184,7 +161,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   background-image: url('Assets/images/Moi.png');
   background-size: cover;
   background-position: center;
-  transition: background-color 1.6s ease, border-color 1.6s ease;
+  transition: background-color .6s ease, border-color .6s ease;
 }
 .card-label{
   position:absolute; top:18px; left:18px;
@@ -208,28 +185,34 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
 .tag{
   font-family:var(--font-mono); font-size:0.76rem; color:var(--text-muted);
   border:1px solid var(--line); padding:6px 12px; border-radius:7px;
-  transition: color 1.5s ease, border-color 1.5s ease;
+  transition: color .6s ease, border-color .6s ease;
 }
 
-/* Fond image pour Competences / Projets / Services : l'image reste identique
-   quel que soit le theme, aucun voile ne vient l'eclaircir/assombrir. */
+/* Fond genere en CSS pour Competences / Projets / Services : un halo de couleur
+   d'accent dans un coin + une fine grille de points, a la place d'une photo.
+   S'adapte tout seul au theme (base sur --bg-card/--line) et reste coherent
+   avec le cote "dev" du site (police mono, grille). Un coin different par
+   carte pour bien les distinguer d'un coup d'oeil. */
 .card-skills{
   background-color: var(--bg-card);
-  background-image: url('Assets/images/comp.png');
-  background-size: cover;
-  background-position: center;
+  background-image:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent-2) 30%, transparent), transparent 62%),
+    radial-gradient(circle, var(--line) 1px, transparent 1.4px);
+  background-size: auto, 16px 16px;
 }
 .strip{
   background-color: var(--bg-card);
-  background-image: url('Assets/images/project.png');
-  background-size: cover;
-  background-position: center;
+  background-image:
+    radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 62%),
+    radial-gradient(circle, var(--line) 1px, transparent 1.4px);
+  background-size: auto, 16px 16px;
 }
 .services-card{
   background-color: var(--bg-card);
-  background-image: url('Assets/images/service.png');
-  background-size: cover;
-  background-position: center;
+  background-image:
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 62%),
+    radial-gradient(circle, var(--line) 1px, transparent 1.4px);
+  background-size: auto, 16px 16px;
 }
 
 /* Projets + Services : meme carte de base, un fanion de coin en miroir pour les distinguer */
@@ -245,7 +228,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
   padding: 34px 40px;
   border:1px solid var(--line); border-radius: var(--radius-lg);
   display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
-  transition: border-color .22s ease, background-color 1.6s ease;
+  transition: border-color .22s ease, background-color .6s ease;
 }
 
 .strip:hover, .services-card:hover{ border-color: var(--accent-2); }
@@ -254,17 +237,6 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent-2); outlin
 .strip h3, .services-card h3{ font-size:1.3rem; margin-top:6px; }
 .strip .arrow, .services-card .arrow{ font-family:var(--font-mono); font-size:1.3rem; color:var(--text-muted); }
 
-/* Ces trois cartes ont une photo en fond : le texte reste toujours blanc,
-   qu'il fasse clair ou sombre, pour rester lisible sur l'image. */
-.card-skills h3,
-.card-skills .tag,
-.card-skills .corner-arrow,
-.strip .label, .services-card .label,
-.strip h3, .services-card h3,
-.strip .arrow, .services-card .arrow{
-  color: #fff;
-}
-
 footer{
   position: fixed; left:0; right:0; bottom:0; z-index:60;
   padding:18px 0; text-align:center; color:var(--text-muted);
@@ -272,5 +244,5 @@ footer{
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(10px);
   border-top:1px solid var(--line);
-  transition: color 1.5s ease, border-color 1.5s ease, background-color 1.6s ease;
+  transition: color .6s ease, border-color .6s ease, background-color .6s ease;
 }

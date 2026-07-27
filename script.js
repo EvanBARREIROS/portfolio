@@ -20,13 +20,17 @@ if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(syncFooterHeight);
 }
 
-// Animation de transition : seul le fond (derriere tout le contenu) se retourne en
-// plaques. Navbar, cartes, texte, images restent affiches en continu et fondent
-// simplement d'une couleur a l'autre (via les transitions CSS deja en place).
+// Animation de transition : un cercle part du bouton theme et se propage jusqu'a
+// couvrir tout l'ecran, revelant la nouvelle couleur de fond. Pendant ce temps,
+// la couleur qu'on quitte reste posee en dur sur le body (pour ne jamais laisser
+// apparaitre un blanc/noir par defaut derriere le cercle). Le reste du contenu
+// (cartes, navbar, texte) fond simplement d'une couleur a l'autre via les
+// transitions CSS deja en place, avec la meme duree pour rester coherent.
 const pageBg = document.getElementById('page-bg');
 let isFlipping = false;
+const REVEAL_MS = 700;
 
-function flipTheme(nextTheme) {
+function flipTheme(nextTheme, originX, originY) {
   if (isFlipping) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,76 +42,49 @@ function flipTheme(nextTheme) {
 
   isFlipping = true;
 
-  // Couleur qu'on quitte (face avant) capturee avant de changer le theme.
+  // Couleur qu'on quitte, capturee avant de changer le theme, pour servir de
+  // fond statique pendant que le cercle revele la nouvelle couleur.
   const leavingBg = getComputedStyle(root).getPropertyValue('--bg').trim();
+  document.body.style.backgroundColor = leavingBg;
 
-  // Taille de plaque cible en pixels : plus petit = grain plus fin. Le nombre de
-  // colonnes/lignes en decoule pour obtenir de vrais carres.
-  const targetTileSize = window.innerWidth < 680 ? 42 : 65;
-  const cols = Math.max(6, Math.round(window.innerWidth / targetTileSize));
-  const rows = Math.max(4, Math.round(window.innerHeight / targetTileSize));
-  const tileDelayStep = 10; // ms, vague diagonale plus resserree
-  const flipDuration = 550; // ms, doit correspondre a la transition CSS
+  // Rayon necessaire pour que le cercle couvre bien tout l'ecran depuis son
+  // point de depart (coin le plus eloigne de l'origine).
+  const dx = Math.max(originX, window.innerWidth - originX);
+  const dy = Math.max(originY, window.innerHeight - originY);
+  const radius = Math.ceil(Math.hypot(dx, dy));
 
-  pageBg.style.setProperty('--flip-cols', cols);
-  pageBg.style.setProperty('--flip-rows', rows);
-  pageBg.innerHTML = '';
+  pageBg.style.transition = 'none';
+  pageBg.style.clipPath = `circle(0px at ${originX}px ${originY}px)`;
 
-  // Le theme change des maintenant : on peut lire la couleur d'arrivee (face arriere)
-  // directement depuis la variable CSS mise a jour.
+  // Le theme change des maintenant : la nouvelle couleur est deja la sur
+  // pageBg, simplement masquee hors du cercle par le clip-path ci-dessus.
   root.setAttribute('data-theme', nextTheme);
   localStorage.setItem('theme', nextTheme);
-  const arrivingBg = getComputedStyle(root).getPropertyValue('--bg').trim();
 
-  const fragment = document.createDocumentFragment();
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const delay = (r + c) * tileDelayStep;
-
-      const cell = document.createElement('span');
-      cell.className = 'tile-cell';
-
-      const tile = document.createElement('span');
-      tile.className = 'flip-tile';
-      tile.style.setProperty('--tile-delay', `${delay}ms`);
-
-      const front = document.createElement('span');
-      front.className = 'face face-front';
-      front.style.setProperty('--tile-front', leavingBg);
-
-      const back = document.createElement('span');
-      back.className = 'face face-back';
-      back.style.setProperty('--tile-back', arrivingBg);
-
-      tile.appendChild(front);
-      tile.appendChild(back);
-      cell.appendChild(tile);
-      fragment.appendChild(cell);
-    }
-  }
-  pageBg.appendChild(fragment);
-  pageBg.classList.add('is-flipping-setup');
-
-  // Deux frames pour garantir que le navigateur a bien peint l'etat initial avant de lancer la transition
+  // Deux frames pour garantir que le navigateur peint bien le cercle a 0
+  // avant de lancer la transition vers le rayon final.
   requestAnimationFrame(() => {
+    pageBg.style.transition = `clip-path ${REVEAL_MS}ms cubic-bezier(.65,0,.35,1)`;
     requestAnimationFrame(() => {
-      pageBg.classList.add('is-flipping');
+      pageBg.style.clipPath = `circle(${radius}px at ${originX}px ${originY}px)`;
     });
   });
 
-  const maxDelay = (cols - 1 + rows - 1) * tileDelayStep;
-  const totalDuration = flipDuration + maxDelay + 80;
   setTimeout(() => {
-    pageBg.classList.remove('is-flipping', 'is-flipping-setup');
-    pageBg.innerHTML = '';
+    pageBg.style.transition = '';
+    pageBg.style.clipPath = '';
+    document.body.style.backgroundColor = '';
     isFlipping = false;
-  }, totalDuration);
+  }, REVEAL_MS + 60);
 }
 
-toggleBtn.addEventListener('click', () => {
+toggleBtn.addEventListener('click', (e) => {
   const current = root.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
-  flipTheme(next);
+  const rect = toggleBtn.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+  flipTheme(next, originX, originY);
 });
 
 // Menu du bouton en haut a droite : ouverture/fermeture, vide pour l'instant

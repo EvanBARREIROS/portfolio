@@ -1,0 +1,175 @@
+/* Styles propres a la page A propos uniquement (pas charges sur les autres pages) */
+
+.about-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0 56px;
+}
+
+.about-bio {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background-color 1.6s ease, border-color .22s ease;
+}
+
+.about-bio::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--text) 8%, transparent), transparent 70%);
+  opacity:0; transition: opacity .25s ease;
+}
+.about-bio:hover::before{ opacity:1; }
+
+.about-photo {
+  width: 260px;
+  height: 260px;
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media (max-width:780px) {
+  .about-photo {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-align: center;
+  margin: 0;
+}
+
+.about-bio p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.about-bio .inline-link {
+  color: var(--accent-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity .2s ease;
+}
+
+.about-bio .inline-link:hover {
+  opacity: 0.75;
+}
+
+.about-tags {
+  margin-top: 4px;
+}
+
+/* Section "Comment je travaille" */
+.method-section {
+  padding: 20px 0 56px;
+}
+
+.method-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 22px;
+}
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width:900px) {
+  .method-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width:600px) {
+  .method-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.method-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  transition: transform .22s ease, border-color .22s ease, background-color .6s ease,
+              opacity .5s ease, translate .5s ease;
+}
+
+.method-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-2);
+}
+
+.method-card::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--text) 10%, transparent), transparent 70%);
+  opacity:0; transition: opacity .25s ease;
+}
+.method-card:hover::before{ opacity:1; }
+
+.method-index {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  letter-spacing: 0.05em;
+}
+
+.method-card h3 {
+  font-size: 1.08rem;
+  margin: 10px 0 8px;
+}
+
+.method-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Etat initial de la revelation au scroll, retire des l'entree dans le viewport (voir about.js) */
+.method-card.reveal {
+  opacity: 0;
+  translate: 0 18px;
+}
+
+.method-card.reveal.in-view {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .method-card.reveal {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* CTA de bas de page, reprend le style .strip existant */
+.about-cta {
+  padding: 0 0 70px;
+}

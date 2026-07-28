@@ -22,6 +22,21 @@
   const subjectOtherInput = document.getElementById('subject_other');
   const subjectDisplay = document.getElementById('subject_display');
 
+  // Petit halo qui suit la souris sur les cartes de contact,
+  // meme effet discret que sur les autres pages.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    document.querySelectorAll('.contact-links, .contact-form-card').forEach((el) => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        el.style.setProperty('--mx', `${x}%`);
+        el.style.setProperty('--my', `${y}%`);
+      });
+    });
+  }
+
   if (!form) return;
 
   // --- Sujet combiné envoyé à EmailJS (ex: "Autre — précision du client") ---

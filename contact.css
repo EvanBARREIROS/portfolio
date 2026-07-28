@@ -34,6 +34,8 @@
 }
 
 .contact-links {
+  position: relative;
+  overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -43,6 +45,15 @@
   gap: 14px;
   transition: background-color 1.6s ease, border-color .22s ease;
 }
+
+.contact-links::before,
+.contact-form-card::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--text) 8%, transparent), transparent 70%);
+  opacity:0; transition: opacity .25s ease;
+}
+.contact-links:hover::before,
+.contact-form-card:hover::before{ opacity:1; }
 
 .contact-link-item {
   display: flex;
@@ -137,6 +148,8 @@
 }
 
 .contact-form-card {
+  position: relative;
+  overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);

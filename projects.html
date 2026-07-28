@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projets — Evan Barreiros</title>
+<meta name="description" content="Projets d'Evan Barreiros : Buzzer, ImPrint, et le thermostat connecté réalisé en BTS CIEL.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+<div class="page-bg" id="page-bg" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <ul class="nav-left">
+      <li><a href="index.html" class="brand">Evan Barreiros</a></li>
+      <li><a href="contact.html" class="contact-link">Contact</a></li>
+    </ul>
+    <div class="topbar-right">
+      <button class="icon-btn" id="theme-toggle" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="menu-panel" id="menu-panel">
+        <a href="about.html">À propos</a>
+        <a href="skills.html">Compétences</a>
+        <a href="projects.html" aria-current="page">Projets</a>
+        <a href="services.html">Services</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero-name">
+    <span class="role">Projets</span>
+    <h1>Ce que j'ai construit</h1>
+    <p>Deux applications mobiles publiées ou en développement, et un projet réalisé en BTS CIEL.</p>
+  </section>
+
+  <section class="projects-list">
+
+    <!-- Buzzer -->
+    <article class="project-card">
+      <div class="project-card-head">
+        <div>
+          <span class="project-status status-live">Publié sur Google Play</span>
+          <h2>Buzzer</h2>
+          <p class="project-tagline">Jeu multijoueur en temps réel pour animer les soirées entre amis.</p>
+        </div>
+        <a href="https://evanbarreiros.github.io/Buzze-Web/" target="_blank" rel="noopener" class="project-link">
+          Voir le site du projet <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="project-desc">
+        Une application de jeu de soirée multijoueur pensée pour être jouée en groupe, en temps réel.
+        Système d'amis avec pseudos et présence en ligne, personnalisation d'avatars, mini-jeu clicker
+        avec générateurs et prestige, et monétisation via Buzzer+ (achats et abonnements Google Play,
+        publicités AdMob). Développée et maintenue en solo, de l'interface jusqu'au backend.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Flutter</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">Google Play Billing</span>
+        <span class="tag">Google AdMob</span>
+      </div>
+    </article>
+
+    <!-- ImPrint -->
+    <article class="project-card">
+      <div class="project-card-head">
+        <div>
+          <span class="project-status status-progress">En pause — reprise après Buzzer</span>
+          <h2>ImPrint</h2>
+          <p class="project-tagline">Application sociale de géolocalisation, au design sombre.</p>
+        </div>
+      </div>
+      <p class="project-desc">
+        Une application sociale centrée sur la carte : géolocalisation en temps réel via MapLibre GL,
+        détection de proximité, et chat en direct par ville grâce à Supabase. Interface en thème sombre,
+        avec bâtiments 3D sur la carte. Mise de côté pour le moment : je compte reprendre son
+        développement une fois Buzzer stabilisé et publié sans bug connu.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Flutter</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">MapLibre GL</span>
+        <span class="tag">Géolocalisation</span>
+        <span class="tag">Temps réel</span>
+      </div>
+    </article>
+
+    <!-- Canard Game -->
+    <article class="project-card">
+      <div class="project-card-head">
+        <div>
+          <span class="project-status status-live">Open-source sur GitHub</span>
+          <h2>Canard Game</h2>
+          <p class="project-tagline">Launcher/jeu de bureau en Python, packagé en exécutable Windows.</p>
+        </div>
+        <a href="https://github.com/BleuDragonViolet/Canard-Game" target="_blank" rel="noopener" class="project-link">
+          Voir sur GitHub <span class="arrow">→</span>
+        </a>
+        <a href="https://bleudragonviolet.itch.io/canard-game" target="_blank" rel="noopener" class="project-link">
+          Jouer sur itch.io <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="project-desc">
+        Un petit launcher/jeu de bureau en Python avec Pygame, empaqueté en exécutable Windows via
+        PyInstaller et Inno Setup. Menu animé (vagues, transitions), mini-jeux dont un morpion, chat
+        intégré en local ou en multijoueur via un serveur hébergé, skins/thèmes personnalisables, et
+        réglages graphiques (plein écran, bordless, FPS, qualité, volume). Vérification de version
+        automatique au lancement et support manette en plus du clavier.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">Pygame</span>
+        <span class="tag">PyInstaller</span>
+        <span class="tag">Inno Setup</span>
+        <span class="tag">Multijoueur</span>
+      </div>
+    </article>
+
+    <!-- Thermostat connecté -->
+    <article class="project-card">
+      <div class="project-card-head">
+        <div>
+          <span class="project-status status-school">Projet scolaire — BTS CIEL</span>
+          <h2>Thermostat Connecté</h2>
+          <p class="project-tagline">Mini-projet en co-enseignement Physique / Informatique, avec Killian Medi-Epee et Kenzy Achheb.</p>
+        </div>
+      </div>
+      <p class="project-desc">
+        Un thermostat connecté économique basé sur un Raspberry Pi Pico W : mesure de la température
+        ambiante par capteur CTN (étalonné avec la relation de Steinhart-Hart), régulation par
+        hystérésis pour limiter les commutations du relais, et transmission des données en Wi-Fi
+        vers un serveur WAMP (Apache2, PHP8, MySQL). Une interface web de supervision (Bootstrap,
+        Chart.js) affiche en temps réel la température actuelle, la consigne, l'état du chauffage
+        et l'évolution sur 24h.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Raspberry Pi Pico W</span>
+        <span class="tag">MicroPython</span>
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Régulation hystérésis</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- CTA vers contact -->
+  <section class="projects-cta">
+    <a href="contact.html" class="strip">
+      <div>
+        <span class="label">Contact</span>
+        <h3>Une idée de projet ? Discutons-en</h3>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+</main>
+
+<footer>© 2026 Evan Barreiros</footer>
+
+<script src="script.js"></script>
+<script src="projects.js"></script>
+</body>
+</html>

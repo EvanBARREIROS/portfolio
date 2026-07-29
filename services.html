@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services - Evan Barreiros</title>
+<meta name="description" content="Développement mobile, sites web et maintenance : les services proposés par Evan Barreiros, développeur Flutter et web indépendant.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="services.css">
+</head>
+<body>
+
+<!-- Couche de fond fixe, seule a se retourner en plaques au changement de theme -->
+<div class="page-bg" id="page-bg" aria-hidden="true"></div>
+
+<!-- Barre du haut : nav a gauche, menu et theme a droite -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <ul class="nav-left">
+      <li><a href="index.html" class="brand">Evan Barreiros</a></li>
+      <li><a href="contact.html" class="contact-link">Contact</a></li>
+    </ul>
+    <div class="topbar-right">
+      <button class="icon-btn" id="theme-toggle" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="menu-panel" id="menu-panel">
+        <a href="about.html">À propos</a>
+        <a href="skills.html">Compétences</a>
+        <a href="projects.html">Projets</a>
+        <a href="services.html" aria-current="page">Services</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Titre -->
+  <section class="services-hero">
+    <span class="role">Ce que je propose</span>
+    <h1>Services</h1>
+    <p>Du cahier des charges à la mise en ligne, je m'occupe de votre projet mobile ou web de bout en bout, seul et à mon rythme, adapté au vôtre.</p>
+  </section>
+
+  <!-- Grille des prestations -->
+  <section class="service-grid">
+
+    <div class="service-card service-card--a">
+      <span class="svc-index">01</span>
+      <span class="cat-label">Mobile</span>
+      <h3>Développement d'applications mobiles</h3>
+      <p class="cat-desc">Conception et développement d'applications Android sur mesure avec Flutter, de la maquette jusqu'à la publication sur le Play Store.</p>
+      <div class="tag-row">
+        <span class="tag">Flutter / Dart</span>
+        <span class="tag">Firebase / Supabase</span>
+        <span class="tag">Publication Play Store</span>
+      </div>
+    </div>
+
+    <div class="service-card service-card--b">
+      <span class="svc-index">02</span>
+      <span class="cat-label">Web</span>
+      <h3>Sites web &amp; vitrines</h3>
+      <p class="cat-desc">Sites vitrines ou applications web sur mesure, pensés pour être rapides, lisibles et faciles à faire évoluer.</p>
+      <div class="tag-row">
+        <span class="tag">HTML / CSS / JS</span>
+        <span class="tag">PHP / Node.js</span>
+        <span class="tag">Responsive</span>
+      </div>
+    </div>
+
+    <div class="service-card service-card--c">
+      <span class="svc-index">03</span>
+      <span class="cat-label">Backend</span>
+      <h3>Bases de données &amp; API</h3>
+      <p class="cat-desc">Modélisation de données, API REST et services backend pour faire communiquer une app mobile ou un site avec de vraies données.</p>
+      <div class="tag-row">
+        <span class="tag">SQL / MySQL</span>
+        <span class="tag">API REST</span>
+        <span class="tag">Temps réel</span>
+      </div>
+    </div>
+
+    <div class="service-card service-card--d">
+      <span class="svc-index">04</span>
+      <span class="cat-label">Suivi</span>
+      <h3>Maintenance &amp; évolutions</h3>
+      <p class="cat-desc">Correction de bugs, ajout de fonctionnalités, mises à jour : je reste disponible après la livraison pour faire vivre le projet.</p>
+      <div class="tag-row">
+        <span class="tag">Corrections</span>
+        <span class="tag">Nouvelles fonctionnalités</span>
+        <span class="tag">Suivi long terme</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Tarification -->
+  <section class="pricing-block">
+    <span class="label">Tarification</span>
+    <h2>Un tarif basé sur le temps, pas sur des forfaits figés</h2>
+    <p class="pricing-intro">Chaque projet est différent : la facturation se fait au temps passé, selon la complexité de ce qui est demandé. Voici un ordre d'idée pour vous situer.</p>
+
+    <div class="pricing-row">
+      <div class="pricing-card">
+        <span class="pricing-figure">250 € – 350 €</span>
+        <span class="pricing-unit">par jour, en moyenne</span>
+        <p>Tarif indicatif pour un profil junior comme le mien, à ajuster selon la difficulté réelle du projet (un développement simple coûte moins cher qu'un développement complexe).</p>
+      </div>
+      <div class="pricing-card pricing-card--quote">
+        <span class="pricing-figure">Sur devis</span>
+        <span class="pricing-unit">pour les projets plus longs ou plus gros</span>
+        <p>Pour un site plus court ou au contraire un projet plus important, un devis est établi après discussion, en fonction du temps réellement nécessaire.</p>
+      </div>
+    </div>
+
+    <p class="pricing-intro pricing-commitment-intro">Le nombre de jours annoncé au départ est une estimation, pas une garantie absolue : voici comment ça se passe si la réalité s'écarte un peu du plan.</p>
+
+    <div class="pricing-row">
+      <div class="pricing-card pricing-card--over">
+        <span class="pricing-figure">-50 %</span>
+        <span class="pricing-unit">sur les jours en plus si ça dépasse</span>
+        <p>Exemple : 3 jours estimés et livrés en 4 jours ? Le 4ᵉ jour est facturé à moitié prix. Une façon de m'excuser du retard sur le délai annoncé.</p>
+      </div>
+      <div class="pricing-card pricing-card--under">
+        <span class="pricing-figure">100 %</span>
+        <span class="pricing-unit">remboursé sur les jours en moins si c'est plus rapide</span>
+        <p>À l'inverse, si le projet est terminé avant le délai estimé, les jours non travaillés sont intégralement remboursés.</p>
+      </div>
+    </div>
+
+    <p class="pricing-intro pricing-commitment-intro">Des réductions existent aussi pour certaines situations, sur présentation d'un justificatif.</p>
+
+    <div class="pricing-row">
+      <div class="pricing-card pricing-card--discount">
+        <span class="pricing-figure">-20 %</span>
+        <span class="pricing-unit">pour les étudiants</span>
+        <p>Sur présentation d'un justificatif de scolarité confirmant votre statut d'étudiant. Non cumulable avec la réduction handicap : seule la meilleure des deux s'applique.</p>
+      </div>
+      <div class="pricing-card pricing-card--discount">
+        <span class="pricing-figure">-20 %</span>
+        <span class="pricing-unit">pour les personnes en situation de handicap</span>
+        <p>Sur présentation d'un justificatif. Non cumulable avec la réduction étudiant : seule la meilleure des deux s'applique.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment se passe une demande -->
+  <section class="process">
+    <span class="label">Comment ça se passe</span>
+    <h2>De votre demande à la mise en ligne</h2>
+    <div class="process-track">
+
+      <div class="process-step">
+        <span class="process-dot">01</span>
+        <div class="service-card process-card">
+          <h3>On discute du besoin</h3>
+          <p>Vous m'expliquez votre idée, je pose les questions nécessaires pour bien cerner le projet.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <span class="process-dot">02</span>
+        <div class="service-card process-card">
+          <h3>Estimation &amp; devis</h3>
+          <p>J'estime le temps nécessaire et je vous propose un tarif clair avant de commencer.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <span class="process-dot">03</span>
+        <div class="service-card process-card">
+          <h3>Développement itératif</h3>
+          <p>J'avance par étapes testables, avec des retours réguliers de votre part.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <span class="process-dot">04</span>
+        <div class="service-card process-card">
+          <h3>Livraison &amp; suivi</h3>
+          <p>Mise en ligne du projet, puis correction et évolutions si besoin.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA vers contact -->
+  <section class="services-cta">
+    <a href="contact.html" class="strip">
+      <div>
+        <span class="label">Contact</span>
+        <h3>Un projet en tête ? Parlons-en</h3>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+</main>
+
+<footer>© 2026 Evan Barreiros</footer>
+
+<script src="services.js"></script>
+</body>
+</html>

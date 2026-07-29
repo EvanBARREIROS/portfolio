@@ -1,0 +1,119 @@
+/* ===========================================================
+   Easter egg "circuit imprimé" — clic maintenu 2s sur une carte
+   de compétence : des pistes lumineuses partent de la carte tenue
+   et viennent connecter les 3 autres, façon circuit PCB (tracé en
+   escalier, pulse qui voyage, sparks aux jonctions), avant de
+   s'éteindre. Reste un secret déclenché au clic maintenu (pas
+   automatique). Cohérent avec l'esprit "dev" du site.
+   =========================================================== */
+
+.circuit-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Léger flash de grille en fond, pour donner du poids au moment
+   où le circuit s'active, sans être criard. */
+.circuit-overlay::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent-2) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-2) 12%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0;
+  animation: circuit-grid-in .5s ease-out forwards;
+}
+@keyframes circuit-grid-in{
+  0%   { opacity: 0; }
+  100% { opacity: .35; }
+}
+
+.circuit-trace{
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .95;
+}
+
+/* Un seul halo flouté, léger, sous chaque piste — le double halo large
+   coûtait trop cher à repeindre avec plusieurs connexions en simultané. */
+.circuit-trace-glow{
+  stroke-width: 6;
+  filter: blur(3px);
+  opacity: .5;
+}
+
+.circuit-via{
+  fill: var(--accent-2);
+  filter: drop-shadow(0 0 5px var(--accent-2)) drop-shadow(0 0 10px var(--accent-2));
+  opacity: 0;
+  transform: scale(.3);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity .2s ease, transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.circuit-via.circuit-via-on{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pulse qui voyage le long de chaque piste une fois tracée */
+.circuit-pulse{
+  fill: #fff;
+  filter: drop-shadow(0 0 6px var(--accent-2)) drop-shadow(0 0 14px var(--accent-2));
+  opacity: 0;
+}
+.circuit-pulse.circuit-pulse-on{
+  opacity: 1;
+}
+
+/* Étincelle radiale à l'arrivée d'une piste sur une carte */
+.circuit-spark{
+  stroke: var(--accent-2);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.circuit-spark.circuit-spark-on{
+  animation: circuit-spark-burst .5s ease-out forwards;
+}
+@keyframes circuit-spark-burst{
+  0%   { opacity: 1; transform: scale(.2); }
+  70%  { opacity: .8; }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* Halo sur les cartes connectées, avec un léger "power surge" au
+   moment de la connexion plutôt qu'un simple fondu statique. */
+.circuit-source,
+.circuit-active{
+  transition: box-shadow .35s ease;
+}
+.circuit-source{
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-2) 65%, transparent),
+    0 0 34px 4px color-mix(in srgb, var(--accent-2) 38%, transparent);
+}
+.circuit-active{
+  animation: circuit-surge .45s ease-out;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-2) 55%, transparent),
+    0 0 30px 3px color-mix(in srgb, var(--accent-2) 30%, transparent);
+}
+@keyframes circuit-surge{
+  0%   { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-2) 90%, transparent), 0 0 50px 10px color-mix(in srgb, var(--accent-2) 60%, transparent); }
+  100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-2) 55%, transparent), 0 0 30px 3px color-mix(in srgb, var(--accent-2) 30%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .circuit-overlay{ display: none; }
+}

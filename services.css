@@ -1,0 +1,311 @@
+/* ---------------------------------------------------------------- */
+/* Styles propres a la page Services (services.html)                 */
+/* A charger APRES style.css : reutilise les variables de theme       */
+/* (--bg, --bg-card, --line, --accent, --accent-2, --font-*, etc.)    */
+/* ---------------------------------------------------------------- */
+
+.services-hero {
+  padding: 52px 0 10px;
+  text-align: center;
+}
+
+.services-hero .role {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: block;
+}
+
+.services-hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.services-hero p {
+  margin: 16px auto 0;
+  max-width: 560px;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+}
+
+/* Grille des 4 prestations : meme carte de base que skill-card, avec un
+   numero d'ordre en haut a droite et un halo de couleur different par
+   carte (coin different a chaque fois) pour bien les distinguer. */
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding: 40px 0 22px;
+}
+
+@media (max-width:780px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background-color: var(--bg-card);
+  padding: 30px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .22s ease, border-color .22s ease, background-color .6s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-2);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--text) 10%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card--a { background-image: radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 62%); }
+.service-card--b { background-image: radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 62%); }
+.service-card--c { background-image: radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 62%); }
+.service-card--d { background-image: radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 62%); }
+
+.svc-index {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.service-card .cat-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.service-card h3 {
+  font-size: 1.2rem;
+  padding-right: 30px;
+}
+
+.service-card .cat-desc {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+html[data-theme="light"] .service-card {
+  box-shadow: 0 2px 6px rgba(30, 20, 10, 0.05), 0 14px 30px -18px rgba(30, 20, 10, 0.18);
+}
+
+/* Tarification */
+.pricing-block {
+  margin: 8px 0 56px;
+}
+
+.pricing-block > .label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.pricing-block h2 {
+  font-size: 1.5rem;
+  max-width: 640px;
+}
+
+.pricing-intro {
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 14px 0 30px;
+  font-size: 0.98rem;
+}
+
+.pricing-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+@media (max-width:780px) {
+  .pricing-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-card);
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1.4px);
+  background-size: 16px 16px;
+  padding: 30px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color .22s ease, background-color .6s ease;
+}
+
+.pricing-card:hover {
+  border-color: var(--accent-2);
+}
+
+.pricing-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 4px 0 0;
+}
+
+.pricing-figure {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--text);
+}
+
+.pricing-card--quote .pricing-figure {
+  color: var(--accent-2);
+}
+
+.pricing-commitment-intro {
+  margin-top: 34px;
+  margin-bottom: 30px;
+}
+
+.pricing-card--over .pricing-figure {
+  color: var(--accent);
+}
+
+.pricing-card--under .pricing-figure {
+  color: var(--accent-2);
+}
+
+.pricing-card--discount .pricing-figure {
+  color: var(--accent-2);
+}
+
+.pricing-unit {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="light"] .pricing-card {
+  box-shadow: 0 2px 6px rgba(30, 20, 10, 0.05), 0 14px 30px -18px rgba(30, 20, 10, 0.18);
+}
+
+/* Deroulement d'une demande : meme logique de timeline que le plan d'action
+   de skills.html, avec ses propres noms de classes (process-*). */
+.process {
+  margin: 0 0 70px;
+}
+
+.process > .label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.process h2 {
+  font-size: 1.6rem;
+  margin-bottom: 34px;
+}
+
+.process-track {
+  position: relative;
+  padding-left: 38px;
+}
+
+.process-track::before {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(var(--accent), var(--accent-2));
+  opacity: .45;
+}
+
+.process-step {
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.process-step:last-child {
+  padding-bottom: 0;
+}
+
+.process-dot {
+  position: absolute;
+  left: -38px;
+  top: 22px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: background-color .6s ease, border-color .22s ease;
+}
+
+.process-card {
+  padding: 22px 26px !important;
+  gap: 8px !important;
+}
+
+.process-card h3 {
+  font-size: 1.05rem;
+  padding-right: 0;
+}
+
+.process-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* CTA de bas de page vers contact.html, reprend le style .strip existant. */
+.services-cta {
+  padding: 0 0 70px;
+}

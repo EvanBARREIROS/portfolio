@@ -61,3 +61,174 @@ html[data-theme="light"] .project-card{
 .projects-cta{
   padding: 8px 0 70px;
 }
+
+/* ===========================================================
+   Easter egg "trou noir" — clic maintenu 2s sur un élément marqué
+   .walk-target : un trou noir s'ouvre au centre de l'écran et
+   aspire TOUTE la page, section par section (.bh-section), puis
+   après un instant un second trou noir rouvre et recrache tout,
+   dans l'ordre, pour remettre la page comme avant.
+   =========================================================== */
+
+/* L'élément réel (pas un clone) qui vole vers/depuis le trou noir. Sa
+   position:fixed et ses coordonnées sont posées en style inline par le
+   JS ; cette classe ne gère que le comportement d'animation. */
+.bh-flying{
+  pointer-events: none;
+  transition: none !important;
+  animation: none;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.bh-flying.bh-sucking{
+  animation: bh-suck .75s cubic-bezier(.6,.05,.85,.35) forwards;
+}
+.bh-flying.bh-spit{
+  animation: bh-spit .7s cubic-bezier(.16,1,.3,1) forwards;
+}
+/* Chemin en spirale : plusieurs points de passage combinant rotation
+   croissante et rapprochement progressif du centre, pour une vraie
+   sensation d'attraction plutôt qu'un simple aller en ligne droite.
+   Uniquement transform/opacity (pas de filter) : léger pour le
+   navigateur, donc le texte et le fond restent parfaitement synchros
+   même sur un gros bloc plein de texte. */
+@keyframes bh-suck{
+  0%{ transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+  25%{ transform: translate(calc(var(--dx) * .08), calc(var(--dy) * .08)) scale(.92) rotate(35deg); opacity: 1; }
+  55%{ transform: translate(calc(var(--dx) * .38), calc(var(--dy) * .38)) scale(.58) rotate(150deg); opacity: .9; }
+  80%{ transform: translate(calc(var(--dx) * .74), calc(var(--dy) * .74)) scale(.26) rotate(280deg); opacity: .5; }
+  100%{ transform: translate(var(--dx), var(--dy)) scale(0) rotate(420deg); opacity: 0; }
+}
+@keyframes bh-spit{
+  0%{ transform: translate(var(--dx), var(--dy)) scale(0) rotate(-420deg); opacity: 0; }
+  20%{ transform: translate(calc(var(--dx) * .74), calc(var(--dy) * .74)) scale(.26) rotate(-280deg); opacity: .5; }
+  45%{ transform: translate(calc(var(--dx) * .38), calc(var(--dy) * .38)) scale(.62) rotate(-140deg); opacity: .95; }
+  75%{ transform: translate(calc(var(--dx) * .08), calc(var(--dy) * .08)) scale(1.06) rotate(-20deg); opacity: 1; }
+  100%{ transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Le trou noir lui-même : halo ambré diffus, disque d'accrétion
+   qui tourne, anneau lumineux courbé autour du cœur, poussière et
+   filaments qui orbitent — posé au centre de l'écran. */
+.black-hole{
+  position: fixed;
+  left: var(--hole-x);
+  top: var(--hole-y);
+  width: var(--hole-size);
+  height: var(--hole-size);
+  margin-left: calc(var(--hole-size) / -2);
+  margin-top: calc(var(--hole-size) / -2);
+  pointer-events: none;
+  z-index: 9998;
+  transform: scale(0);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.black-hole.hole-opening{ animation: hole-open .6s cubic-bezier(.3,1.45,.55,1) forwards; }
+.black-hole.hole-closing{ animation: hole-close .45s ease-in forwards; }
+@keyframes hole-open{
+  0%{ transform: scale(0); opacity: 0; }
+  65%{ transform: scale(1.08); opacity: 1; }
+  100%{ transform: scale(1); opacity: 1; }
+}
+@keyframes hole-close{
+  0%{ transform: scale(1); opacity: 1; }
+  100%{ transform: scale(0); opacity: 0; }
+}
+
+.hole-glow{
+  position: absolute; inset: -75%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,196,130,.55) 0%,
+    rgba(255,150,70,.3) 28%,
+    rgba(90,45,20,.14) 52%,
+    transparent 75%);
+  filter: blur(16px);
+  animation: hole-glow-pulse 3.4s ease-in-out infinite;
+}
+@keyframes hole-glow-pulse{
+  0%, 100%{ opacity: .85; }
+  50%{ opacity: 1; }
+}
+
+.hole-disk{
+  position: absolute; inset: -38%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(255,224,175,.95) 16deg,
+    rgba(255,150,60,.8) 42deg,
+    rgba(110,55,20,.18) 85deg,
+    transparent 135deg,
+    transparent 225deg,
+    rgba(255,190,110,.6) 268deg,
+    rgba(255,235,195,.95) 296deg,
+    transparent 335deg,
+    transparent 360deg);
+  transform: scaleY(.4) rotate(-10deg);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation: hole-disk-spin 6.5s linear infinite;
+}
+@keyframes hole-disk-spin{
+  to{ transform: scaleY(.4) rotate(350deg); }
+}
+
+.hole-ring{
+  position: absolute; inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    transparent 60%,
+    rgba(255,228,185,.95) 67%,
+    rgba(255,175,105,.5) 74%,
+    transparent 83%);
+  filter: blur(1.5px);
+  mix-blend-mode: screen;
+}
+
+.black-hole-core{
+  position: absolute; inset: 17%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255,255,255,.14), transparent 42%),
+    radial-gradient(circle at 50% 50%, #030303 0%, #000 62%, #000 100%);
+  box-shadow: 0 0 30px 6px rgba(0,0,0,.7);
+}
+
+.hole-orbit{
+  position: absolute; inset: 0;
+  animation: hole-spin 2.8s linear infinite;
+}
+.hole-spark{
+  position: absolute; top: 50%; left: 50%;
+  width: var(--s, 3px); height: var(--s, 3px);
+  margin-left: calc(var(--s, 3px) / -2);
+  margin-top: calc(var(--s, 3px) / -2);
+  border-radius: 50%;
+  background: #ffdcae;
+  box-shadow: 0 0 6px 1px rgba(255,190,110,.85);
+  transform: rotate(var(--a)) translateX(var(--r));
+  opacity: .85;
+}
+.hole-streak{
+  position: absolute; top: 50%; left: 50%;
+  width: 1.5px; height: var(--len, 26px);
+  margin-left: -.75px;
+  transform-origin: 50% 0%;
+  transform: rotate(var(--a)) translateY(var(--r));
+  background: linear-gradient(to bottom, rgba(255,214,160,0), rgba(255,214,160,.7));
+  opacity: .55;
+}
+@keyframes hole-spin{
+  to{ transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .bh-flying.bh-sucking, .bh-flying.bh-spit,
+  .black-hole.hole-opening, .black-hole.hole-closing,
+  .hole-orbit, .hole-disk, .hole-glow{
+    animation: none !important;
+  }
+}
